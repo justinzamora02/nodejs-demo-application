@@ -1,21 +1,31 @@
-const config = require('./config');
+const express = require('express');
 const logger = require('./lib/logger');
-const coins = require('./services/get-coins');
+const { http } = require('./config');
+const { httpLogger, errorHandler } = require('./middlewares');
 
-logger.info('Starting application eme');
+const app = express();
+const { port } = http;
 
-async function main() {
-  try {
-    const allCoins = await coins.getCoins();
-    logger.info(allCoins);
-  } catch (err) {
-    logger.error(err);
-  }
-}
+app.use(express.json());
+app.use(httpLogger);
+app.use(errorHandler);
 
-main()
-  .then()
-  .catch((err) => {
-    logger.error(err);
-    process.exit(1);
+app.get('/healthz', async (request, response) => {
+  response.status(200);
+  response.send('OK');
+});
+
+const server = app.listen(port, () => {
+  logger.info(`Listening on port: ${port}`);
+});
+
+const close = () => {
+  logger.info(`Gracefully shutting down server`);
+  server.close(() => {
+    logger.info('Server closed');
+    process.exit(0);
   });
+};
+
+process.on('SIGTERM', close);
+process.on('SIGINT', close);
