@@ -6,6 +6,11 @@ if (env === 'development') {
   require('dotenv').config();
 }
 
+const database = {
+  url: process.env.DATABASE_URL || 'postgres://sample_demo_user:@127.0.0.1:5432/sample_demo',
+};
+
 module.exports = {
   env,
+  database,
 };

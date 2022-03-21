@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.2-alpine3.15
+    ports:
+      - '5432:5432'
+    volumes:
+      - type: bind
+        source: ./scripts/db_init.sql
+        target: /docker-entrypoint-initdb.d/setup-postgres.sql
+    environment:
+      - POSTGRES_USER=sample_demo_user
+      - POSTGRES_HOST_AUTH_METHOD=trust
