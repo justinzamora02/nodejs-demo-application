@@ -1,7 +1,8 @@
 const env = process.env.NODE_ENV || 'development';
+const logger = require('../lib/logger');
 
 if (env === 'development') {
-  console.log('Loading local config');
+  logger.info('Loading local config');
   require('dotenv').config();
 }
 

@@ -1,3 +1,4 @@
 const config = require('./config');
+const logger = require('./lib/logger');
 
-console.log(config.env);
+logger.info('Starting application eme');
