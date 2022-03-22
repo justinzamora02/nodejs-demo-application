@@ -1,0 +1,10 @@
+# Ignore everything by default then add what you need
+* 
+
+! package.json
+! yarn.lock
+
+! db/*
+! src/*
+! .sequelize.rc
+
