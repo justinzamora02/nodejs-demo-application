@@ -1,7 +1,7 @@
 const express = require('express');
 const models = require('./db/models');
 const { httpLogger, errorHandler } = require('./middlewares');
-const router = require('./router');
+const router = require('./routers');
 
 const createServer = async () => {
   const { sequelize } = models;

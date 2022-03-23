@@ -7,13 +7,13 @@ const main = async () => {
   const server = await createServer();
   const { port } = http;
 
-  server.listen(port, () => {
+  const instance = server.listen(port, () => {
     logger.info(`Listening on port: ${port}`);
   });
 
   const close = () => {
     logger.info(`Gracefully shutting down server`);
-    server.close(() => {
+    instance.close(() => {
       logger.info('Server closed');
       process.exit(0);
     });
