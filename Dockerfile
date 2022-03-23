@@ -17,4 +17,4 @@ EXPOSE 3000
 
 USER $USER
 
-CMD ["node", "src/index.js"]
+CMD ["node", "src/server.js"]
