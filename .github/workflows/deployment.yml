@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -47,3 +47,20 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Create repository dispatch event
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh workflow run -R justinzamora02/gitops deployment \
+            -f application=demo-app \
+            -f environment=local \
+            -f image_name=justinzamora02/nodejs-demo-application \
+            -f image_tag=${{ github.sha }}
