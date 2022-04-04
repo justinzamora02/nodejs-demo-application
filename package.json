@@ -25,7 +25,8 @@
     "migration:create": "sequelize-cli migration:generate",
     "migration:down": "sequelize-cli db:migrate:undo",
     "migration:down:all": "sequelize-cli db:migrate:undo:all",
-    "migration:up": "sequelize-cli db:migrate"
+    "migration:up": "sequelize-cli db:migrate",
+    "lint": "yarn run eslint src/"
   },
   "dependencies": {
     "coingecko-api": "^1.0.10",
