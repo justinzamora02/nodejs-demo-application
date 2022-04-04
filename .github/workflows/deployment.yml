@@ -39,7 +39,7 @@ jobs:
         with:
           scan-type: 'config'
           hide-progress: false
-          format: 'table'
+          format: 'sarif'
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
@@ -90,7 +90,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'docker.io/justinzamora02/nodejs-demo-application:${{ github.sha }}'
-          format: 'table'
+          format: 'sarif'
           exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
