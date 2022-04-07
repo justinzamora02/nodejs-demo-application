@@ -8,6 +8,8 @@ RUN adduser -D $USER
 
 COPY ["yarn.lock", "package.json", "./"] .
 
+RUN apk --no-cache --update add curl
+
 RUN yarn install --prod --frozen-lockfile && \
   yarn cache clean
   
